@@ -34,6 +34,24 @@ GROUP BY first_name, last_name, city, amount
 ORDER BY Total_payments desc
 limit 5) as Total_amount_paid
 
+SUB QUERY "LEFT JOIN" CLAUSE
+Select count (distinct A.customer_id) as all_customer_count, D.Country, count (top_5_customers) AS top_5_cutomers_count
+from customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER JOIN city c ON B.city_id = c.city_id
+INNER JOIN country D ON c.country_id = D.country_id
+LEFT JOIN (SELECT sum (A.Amount) as Total_payments, B.first_name, B.last_name, D.city
+FROM Payment A
+INNER JOIN customer B ON A.customer_id = B.customer_id
+INNER JOIN Address C ON B.address_id = C.address_id
+INNER JOIN city D ON C.city_ID = D.city_ID
+WHERE city in ('london', 'Aurora', 'santiago_de_compostela', 'Iwaki', 'shanwei','Tianjin', 'benguela', 'rustenburg', 'newcastle')
+GROUP BY first_name, last_name, city, amount
+ORDER BY Total_payments desc
+limit 5) AS top_5_customers ON A.first_name = top_5_customers.first_name
+Group by D.country
+having count (top_5_customers) > 0
+
 
 
 
