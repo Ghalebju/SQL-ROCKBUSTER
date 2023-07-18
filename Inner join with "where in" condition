@@ -1,8 +1,0 @@
-SELECT sum (A.Amount) as Total_payments, B.first_name, B.last_name, D.city FROM Payment A
-INNER JOIN customer B ON A.customer_id = B.customer_id
-INNER JOIN Address C ON B.address_id = C.address_id
-INNER JOIN city D ON C.city_ID = D.city_ID
-WHERE city in ('london', 'Aurora', 'santiago_de_compostela', 'Iwaki', 'shanwei','Tianjin', 'benguela', 'rustenburg', 'newcastle')
-GROUP BY first_name, last_name, city, amount
-ORDER BY Total_payments desc
-limit 5;
