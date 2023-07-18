@@ -1,4 +1,4 @@
-# CTE QUERY
+#1 CTE QUERY
 
 with Top_five_customers (Total_payments, first_name, last_name, city) as (SELECT sum (A.Amount) as Total_payments, B.first_name, B.last_name, D.city, E.country
 FROM Payment A
@@ -10,7 +10,7 @@ ORDER BY Total_payments desc
 limit 5)
 select count (distinct A.customer_id) as all_customer_count, D.country,
 
-# INNER JOIN WITH "WHERE IN" CONDITION
+#2 INNER JOIN WITH "WHERE IN" CONDITION
 
 SELECT sum (A.Amount) as Total_payments, B.first_name, B.last_name, D.city FROM Payment A
 INNER JOIN customer B ON A.customer_id = B.customer_id
@@ -20,6 +20,20 @@ WHERE city in ('london', 'Aurora', 'santiago_de_compostela', 'Iwaki', 'shanwei',
 GROUP BY first_name, last_name, city, amount
 ORDER BY Total_payments desc
 limit 5;
+
+#3 SUB QUERY "FROM" CLAUSE
+select avg (Total_payments) as average
+from
+(SELECT sum (A.Amount) as Total_payments, B.first_name, B.last_name, D.city
+FROM Payment A
+INNER JOIN customer B ON A.customer_id = B.customer_id
+INNER JOIN Address C ON B.address_id = C.address_id
+INNER JOIN city D ON C.city_ID = D.city_ID
+WHERE city in ('london', 'Aurora', 'santiago_de_compostela', 'Iwaki', 'shanwei','Tianjin', 'benguela', 'rustenburg', 'newcastle')
+GROUP BY first_name, last_name, city, amount
+ORDER BY Total_payments desc
+limit 5) as Total_amount_paid
+
 
 
 
