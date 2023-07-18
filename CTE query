@@ -34,7 +34,7 @@ GROUP BY first_name, last_name, city, amount
 ORDER BY Total_payments desc
 limit 5) as Total_amount_paid
 
-SUB QUERY "LEFT JOIN" CLAUSE
+#4 SUB QUERY "LEFT JOIN" CLAUSE
 Select count (distinct A.customer_id) as all_customer_count, D.Country, count (top_5_customers) AS top_5_cutomers_count
 from customer A
 INNER JOIN address B ON A.address_id = B.address_id
