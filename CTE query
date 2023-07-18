@@ -1,4 +1,5 @@
 # CTE QUERY
+
 with Top_five_customers (Total_payments, first_name, last_name, city) as (SELECT sum (A.Amount) as Total_payments, B.first_name, B.last_name, D.city, E.country
 FROM Payment A
 INNER JOIN customer B ON A.customer_id = B.customer_id INNER JOIN Address C ON B.address_id = C.address_id INNER JOIN city D ON C.city_ID = D.city_ID
@@ -9,6 +10,7 @@ ORDER BY Total_payments desc
 limit 5)
 select count (distinct A.customer_id) as all_customer_count, D.country,
 
+# INNER JOIN WITH "WHERE IN" CONDITION
 
 SELECT sum (A.Amount) as Total_payments, B.first_name, B.last_name, D.city FROM Payment A
 INNER JOIN customer B ON A.customer_id = B.customer_id
